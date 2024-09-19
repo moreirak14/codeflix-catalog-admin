@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "codeflix-catalog-admin"
+version = "0.1.0"
+description = ""
+authors = ["Kaique Moreira <kaiquemoreira98@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
