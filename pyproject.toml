@@ -15,6 +15,40 @@ ruff = "^0.6.6"
 pytest = "^8.3.3"
 
 
+[tool.pytest.ini_options]
+addopts = [
+    "--cov=./app",
+    "--cov-report=html",
+    "--cov-fail-under=95",
+    "--color=yes",
+    "-vv",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 79
+lint.select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends"]
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 79
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
