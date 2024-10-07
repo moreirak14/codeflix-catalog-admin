@@ -2,7 +2,7 @@ from uuid import UUID
 
 import pytest
 
-from app.category import Category
+from src.core.category.domain.category import Category
 
 
 class TestCategory:

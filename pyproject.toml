@@ -18,7 +18,7 @@ pytest-cov = "^5.0.0"
 
 [tool.pytest.ini_options]
 addopts = [
-    "--cov=./app",
+    "--cov=./src",
     "--cov-report=html",
     "--cov-fail-under=95",
     "--color=yes",
