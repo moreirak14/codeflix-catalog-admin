@@ -1,20 +1,41 @@
+from dataclasses import dataclass
 from uuid import UUID
 
+from src.core.category.application.category_repository import (
+    CategoryRepository,
+)
+from src.core.category.application.exceptions import InvalidCategoryDataError
 from src.core.category.domain.category import Category
 
 
-class InvalidCategoryDataError(Exception):
-    pass
+@dataclass
+class CreateCategoryRequest:
+    name: str
+    description: str = ""
+    is_active: bool = True
 
 
-def create_category(
-    name: str, description: str = None, is_active: bool = True
-) -> UUID:
-    try:
-        category = Category(
-            name=name, description=description, is_active=is_active
-        )
-    except ValueError as error:
-        raise InvalidCategoryDataError(str(error)) from error
+@dataclass
+class CreateCategoryResponse:
+    id: UUID
 
-    return category.id
+
+class CreateCategory:
+    def __init__(self, repository: CategoryRepository):
+        self.repository = repository
+
+    def execute(
+        self, request: CreateCategoryRequest
+    ) -> CreateCategoryResponse:
+        try:
+            category = Category(
+                name=request.name,
+                description=request.description,
+                is_active=request.is_active,
+            )
+        except ValueError as error:
+            raise InvalidCategoryDataError(str(error)) from error
+
+        self.repository.save(category)
+
+        return CreateCategoryResponse(id=category.id)
