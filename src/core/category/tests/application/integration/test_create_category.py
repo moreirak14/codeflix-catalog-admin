@@ -1,17 +1,22 @@
 from uuid import UUID
 
-from src.core.category.application.create_category import CreateCategory, CreateCategoryRequest
-from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
+from src.core.category.application.create_category import (
+    CreateCategory,
+    CreateCategoryRequest,
+)
+from src.core.category.infra.in_memory_category_repository import (
+    InMemoryCategoryRepository,
+)
 
 
 class TestCreateCategory:
     def test_create_category(self):
-        repository = InMemoryCategoryRepository() # SQLAlchemyCategoryRepository() or DjangoCategoryRepository()
+        repository = (
+            InMemoryCategoryRepository()
+        )  # SQLAlchemyCategoryRepository() or DjangoCategoryRepository()
         use_case = CreateCategory(repository=repository)
         request = CreateCategoryRequest(
-            name="name",
-            description="description",
-            is_active=True
+            name="name", description="description", is_active=True
         )
 
         response = use_case.execute(request)
