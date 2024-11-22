@@ -3,10 +3,15 @@ from uuid import uuid4
 import pytest
 
 from src.core.category.application.exceptions import NotFoundCategoryError
-from src.core.category.application.get_category import GetCategory, GetCategoryRequest, GetCategoryResponse
-
+from src.core.category.application.get_category import (
+    GetCategory,
+    GetCategoryRequest,
+    GetCategoryResponse,
+)
 from src.core.category.domain.category import Category
-from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
+from src.core.category.infra.in_memory_category_repository import (
+    InMemoryCategoryRepository,
+)
 
 
 class TestGetCategory:
@@ -24,7 +29,7 @@ class TestGetCategory:
 
         repository = InMemoryCategoryRepository(
             categories=[category_1, category_2]
-        ) # SQLAlchemyCategoryRepository() or DjangoCategoryRepository()
+        )  # SQLAlchemyCategoryRepository() or DjangoCategoryRepository()
 
         use_case = GetCategory(repository=repository)
         request = GetCategoryRequest(
@@ -54,7 +59,7 @@ class TestGetCategory:
 
         repository = InMemoryCategoryRepository(
             categories=[category_1, category_2]
-        ) # SQLAlchemyCategoryRepository() or DjangoCategoryRepository()
+        )  # SQLAlchemyCategoryRepository() or DjangoCategoryRepository()
 
         use_case = GetCategory(repository=repository)
 

@@ -20,7 +20,7 @@ pytest-cov = "^5.0.0"
 addopts = [
     "--cov=./src",
     "--cov-report=html",
-    "--cov-fail-under=98",
+    "--cov-fail-under=99",
     "--color=yes",
     "-vv",
 ]

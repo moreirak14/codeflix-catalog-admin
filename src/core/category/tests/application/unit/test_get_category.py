@@ -1,16 +1,13 @@
-from unittest.mock import MagicMock, create_autospec
-
-import pytest
+from unittest.mock import create_autospec
 
 from src.core.category.application.category_repository import (
     CategoryRepository,
 )
-from src.core.category.application.create_category import (
-    CreateCategory,
-    CreateCategoryRequest,
+from src.core.category.application.get_category import (
+    GetCategory,
+    GetCategoryRequest,
+    GetCategoryResponse,
 )
-from src.core.category.application.exceptions import InvalidCategoryDataError
-from src.core.category.application.get_category import GetCategory, GetCategoryRequest, GetCategoryResponse
 from src.core.category.domain.category import Category
 
 

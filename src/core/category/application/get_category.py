@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from uuid import UUID
 
+from src.core.category.application.category_repository import (
+    CategoryRepository,
+)
 from src.core.category.application.exceptions import NotFoundCategoryError
-from src.core.category.infra.in_memory_category_repository import InMemoryCategoryRepository
 
 
 @dataclass
@@ -19,16 +21,16 @@ class GetCategoryResponse:
 
 
 class GetCategory:
-    def __init__(self, repository: InMemoryCategoryRepository):
+    def __init__(self, repository: CategoryRepository):
         self.repository = repository
 
-    def execute(
-        self, request: GetCategoryRequest
-    ) -> GetCategoryResponse:
+    def execute(self, request: GetCategoryRequest) -> GetCategoryResponse:
         category = self.repository.get_by_id(id=request.id)
 
         if not category:
-            raise NotFoundCategoryError(f"Category with ID {request.id} not found")
+            raise NotFoundCategoryError(
+                f"Category with ID {request.id} not found"
+            )
 
         return GetCategoryResponse(
             id=category.id,
