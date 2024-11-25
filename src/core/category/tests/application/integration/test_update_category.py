@@ -3,14 +3,17 @@ from uuid import uuid4
 import pytest
 
 from src.core.category.application.exceptions import NotFoundCategoryError
-from src.core.category.application.update_category import UpdateCategoryRequest, UpdateCategory
+from src.core.category.application.update_category import (
+    UpdateCategory,
+    UpdateCategoryRequest,
+)
 from src.core.category.domain.category import Category
 from src.core.category.infra.in_memory_category_repository import (
     InMemoryCategoryRepository,
 )
 
 
-class TestGetCategory:
+class TestUpdateCategory:
     def test_update_category_name_and_description(self):
         category = Category(
             name="name",
@@ -68,5 +71,5 @@ class TestGetCategory:
             name="new name",
         )
 
-        with pytest.raises(NotFoundCategoryError) as exc:
+        with pytest.raises(NotFoundCategoryError):
             use_case.execute(request)

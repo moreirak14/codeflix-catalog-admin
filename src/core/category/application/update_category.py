@@ -32,11 +32,17 @@ class UpdateCategory:
             category.name = updated_name
 
         updated_description = request.description
-        if updated_description is not None and updated_description != category.description:
+        if (
+            updated_description is not None
+            and updated_description != category.description
+        ):
             category.description = updated_description
 
         updated_is_active = request.is_active
-        if updated_is_active is not None and updated_is_active != category.is_active:
+        if (
+            updated_is_active is not None
+            and updated_is_active != category.is_active
+        ):
             category.is_active = updated_is_active
 
         self.repository.update(category)

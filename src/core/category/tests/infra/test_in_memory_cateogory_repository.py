@@ -40,3 +40,40 @@ class TestDeleteInMemoryCategoryRepository:
 
         assert len(repository.categories) == 0
         assert repository.get_by_id(id=category.id) is None
+
+
+class TestUpdateInMemoryCategoryRepository:
+    def test_can_update_category(self):
+        category = Category(
+            name="name", description="description", is_active=True
+        )
+        repository = InMemoryCategoryRepository(categories=[category])
+
+        updated_category = Category(
+            id=category.id,
+            name="new name",
+            description="new description",
+            is_active=False,
+        )
+
+        repository.update(category=updated_category)
+
+        assert len(repository.categories) == 1
+        assert repository.categories[0] == updated_category
+
+
+class TestListInMemoryCategoryRepository:
+    def test_can_list_categories(self):
+        category_1 = Category(
+            name="name_1", description="description_1", is_active=True
+        )
+        category_2 = Category(
+            name="name_2", description="description_2", is_active=True
+        )
+        repository = InMemoryCategoryRepository(
+            categories=[category_1, category_2]
+        )
+
+        result = repository.list()
+
+        assert result == [category_1, category_2]

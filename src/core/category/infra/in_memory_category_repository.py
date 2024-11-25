@@ -28,3 +28,6 @@ class InMemoryCategoryRepository(CategoryRepository):
             if c.id == category.id:
                 self.categories[index] = category
                 break
+
+    def list(self) -> list[Category]:
+        return [category for category in self.categories]
