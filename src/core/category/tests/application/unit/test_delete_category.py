@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock, create_autospec
+from unittest.mock import create_autospec
 from uuid import uuid4
 
 import pytest
@@ -6,7 +6,10 @@ import pytest
 from src.core.category.application.category_repository import (
     CategoryRepository,
 )
-from src.core.category.application.delete_category import DeleteCategory, DeleteCategoryRequest
+from src.core.category.application.delete_category import (
+    DeleteCategory,
+    DeleteCategoryRequest,
+)
 from src.core.category.application.exceptions import NotFoundCategoryError
 from src.core.category.domain.category import Category
 
@@ -34,7 +37,7 @@ class TestDeleteCategory:
 
         use_case = DeleteCategory(repository=mock_repository)
 
-        with pytest.raises(NotFoundCategoryError) as exc:
+        with pytest.raises(NotFoundCategoryError):
             use_case.execute(request=DeleteCategoryRequest(id=uuid4()))
 
         assert mock_repository.delete.called is False

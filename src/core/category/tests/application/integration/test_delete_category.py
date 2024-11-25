@@ -1,8 +1,3 @@
-from uuid import uuid4
-
-import pytest
-
-from src.core.category.application.exceptions import NotFoundCategoryError
 from src.core.category.application.delete_category import (
     DeleteCategory,
     DeleteCategoryRequest,

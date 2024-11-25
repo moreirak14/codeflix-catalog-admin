@@ -69,5 +69,5 @@ class TestGetCategory:
             id=not_found_id,
         )
 
-        with pytest.raises(NotFoundCategoryError) as exc:
+        with pytest.raises(NotFoundCategoryError):
             use_case.execute(request)

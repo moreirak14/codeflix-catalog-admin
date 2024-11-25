@@ -7,8 +7,8 @@ from src.core.category.domain.category import Category
 
 
 class InMemoryCategoryRepository(CategoryRepository):
-    def __init__(self, categories=None):
-        self.categories = categories or []
+    def __init__(self, categories: list[Category] = None):
+        self.categories: list[Category] = categories or []
 
     def save(self, category: Category) -> None:
         self.categories.append(category)
@@ -22,3 +22,9 @@ class InMemoryCategoryRepository(CategoryRepository):
     def delete(self, id: UUID) -> None:
         category = self.get_by_id(id=id)
         self.categories.remove(category)
+
+    def update(self, category: Category) -> None:
+        for index, c in enumerate(self.categories):
+            if c.id == category.id:
+                self.categories[index] = category
+                break
