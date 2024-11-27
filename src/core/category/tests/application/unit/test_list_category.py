@@ -3,7 +3,11 @@ from unittest.mock import create_autospec
 from src.core.category.application.category_repository import (
     CategoryRepository,
 )
-from src.core.category.application.list_category import ListCategory, ListCategoryResponse, CategoryOutput
+from src.core.category.application.list_category import (
+    CategoryOutput,
+    ListCategory,
+    ListCategoryResponse,
+)
 from src.core.category.domain.category import Category
 
 
