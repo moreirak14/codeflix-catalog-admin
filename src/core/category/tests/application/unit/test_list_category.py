@@ -13,11 +13,6 @@ from src.core.category.domain.category import Category
 
 class TestListCategory:
     def test_list_category(self):
-        category = Category(
-            name="name",
-            description="description",
-            is_active=True,
-        )
         mock_repository = create_autospec(CategoryRepository)
         mock_repository.list.return_value = []
 
