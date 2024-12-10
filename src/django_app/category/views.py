@@ -1,7 +1,6 @@
 from uuid import uuid4
 
-from django.shortcuts import render
-from rest_framework import viewsets, status
+from rest_framework import status, viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
 
@@ -24,5 +23,5 @@ class CategoryViewSet(viewsets.ViewSet):
                     "is_active": True,
                 },
             ],
-            status=status.HTTP_200_OK
+            status=status.HTTP_200_OK,
         )
