@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from src.core.category.application.category_repository import (
+from src.core.category.domain.category_repository import (
     CategoryRepository,
 )
 
