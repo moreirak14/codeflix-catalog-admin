@@ -8,7 +8,7 @@ from src.core.category.domain.category_repository import (
 
 @dataclass
 class ListCategoryRequest:
-    id: UUID
+    pass
 
 
 @dataclass

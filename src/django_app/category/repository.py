@@ -1,9 +1,9 @@
 from abc import ABC
 from uuid import UUID
 
-from src.core.category.domain.category_repository import CategoryRepository
-from src.core.category.domain.category import Category
 from django_app.category.models import CategoryModel
+from src.core.category.domain.category import Category
+from src.core.category.domain.category_repository import CategoryRepository
 
 
 class DjangoORMCategoryRepository(CategoryRepository, ABC):
