@@ -1,46 +1,58 @@
-from rest_framework.test import APITestCase
+import pytest
+from rest_framework import status
+from rest_framework.test import APIClient
 
 from django_app.category.repository import DjangoORMCategoryRepository
 from src.core.category.domain.category import Category
 
 
-# Create your tests here.
-class TestCategoryAPI(APITestCase):
-    def test_list_categories(self):
-        category_1 = Category(
-            name="name_1",
-            description="description_1",
-            is_active=True,
-        )
-        category_2 = Category(
-            name="name_2",
-            description="description_2",
+@pytest.mark.django_db
+class TestCategoryAPI:
+    @pytest.fixture
+    def category_movie(self) -> Category:
+        return Category(
+            name="Movie",
+            description="Movie description",
             is_active=True,
         )
 
-        repository = DjangoORMCategoryRepository()
-        repository.save(category_1)
-        repository.save(category_2)
+    @pytest.fixture
+    def category_electronic(self) -> Category:
+        return Category(
+            name="Electronic",
+            description="Electronic description",
+            is_active=True,
+        )
 
-        response = self.client.get(path="/api/categories/")
+    @pytest.fixture
+    def category_repository(self) -> DjangoORMCategoryRepository:
+        return DjangoORMCategoryRepository()
+
+    def test_list_categories(
+        self,
+        category_movie: Category,
+        category_electronic: Category,
+        category_repository: DjangoORMCategoryRepository,
+    ):
+        category_repository.save(category_movie)
+        category_repository.save(category_electronic)
 
         expected_data = [
             {
-                "id": str(category_1.id),
-                "name": category_1.name,
-                "description": category_1.description,
-                "is_active": category_1.is_active,
+                "id": category_movie.id,
+                "name": category_movie.name,
+                "description": category_movie.description,
+                "is_active": category_movie.is_active,
             },
             {
-                "id": str(category_2.id),
-                "name": category_2.name,
-                "description": category_2.description,
-                "is_active": category_2.is_active,
+                "id": category_electronic.id,
+                "name": category_electronic.name,
+                "description": category_electronic.description,
+                "is_active": category_electronic.is_active,
             },
         ]
 
-        response_data = response.json()
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response_data, expected_data)
-        self.assertEqual(len(response_data), 2)
+        response = APIClient().get("/api/categories/")
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.data) == 2
+        assert response.data == expected_data
